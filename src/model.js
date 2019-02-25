@@ -4,7 +4,7 @@ exports.list = () => ({ ok: true, message: 'USER-LIST', list: db.read() })
 // ////////////////////////////////////////////////////////////////////////// //
 exports.update = (userId, user) => {
   const data = db.read()
-  const userIndex = data.findIndex(({ id }) => id == userId)
+  const userIndex = data.findIndex(({ id }) => id === userId)
 
   if (userIndex < 0) return { ok: false, message: 'USER-NOT-FOUND' }
 
@@ -15,7 +15,7 @@ exports.update = (userId, user) => {
 // ////////////////////////////////////////////////////////////////////////// //
 exports.create = obj => {
   const data = db.read()
-  const user = { id: Date.now(), ...obj }
+  const user = { id: String(Date.now()), ...obj }
 
   data.push(user)
   db.write(data)
@@ -24,7 +24,7 @@ exports.create = obj => {
 // ////////////////////////////////////////////////////////////////////////// //
 exports.remove = userId => {
   const data = db.read()
-  const userIndex = data.findIndex(({ id }) => id == userId)
+  const userIndex = data.findIndex(({ id }) => id === userId)
 
   if (userIndex < 0) return { ok: false, message: 'USER-NOT-FOUND', userId }
 
