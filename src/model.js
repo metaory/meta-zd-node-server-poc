@@ -2,13 +2,13 @@ const db = require('./db')
 // ////////////////////////////////////////////////////////////////////////// //
 exports.list = () => ({ ok: true, list: db.read() })
 // ////////////////////////////////////////////////////////////////////////// //
-exports.update = user => {
+exports.update = (userId, user) => {
   const data = db.read()
-  const userIndex = data.findIndex(({ id }) => id === user.id)
+  const userIndex = data.findIndex(({ id }) => id == userId)
 
   if (userIndex < 0) return { ok: false, message: 'USER-NOT-FOUND' }
 
-  data[userIndex] = user
+  data[userIndex] = { id: userId, ...user }
   db.write(data)
   return { ok: true, user }
 }
@@ -24,7 +24,7 @@ exports.create = obj => {
 // ////////////////////////////////////////////////////////////////////////// //
 exports.remove = userId => {
   const data = db.read()
-  const userIndex = data.findIndex(({ id }) => id === Number(userId))
+  const userIndex = data.findIndex(({ id }) => id == userId)
 
   if (userIndex < 0) return { ok: false, message: 'USER-NOT-FOUND' }
 

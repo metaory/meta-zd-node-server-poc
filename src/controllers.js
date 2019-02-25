@@ -1,8 +1,6 @@
-/* eslint-disable */
 const makeResponse = require('./response')
 const validate = require('./validate')
 const model = require('./model')
-
 // ////////////////////////////////////////////////////////////////////////// //
 const resolveRequest = req =>
   new Promise(resolve => {
@@ -18,6 +16,8 @@ const resolveRequest = req =>
   })
 // ////////////////////////////////////////////////////////////////////////// //
 // ////////////////////////////////////////////////////////////////////////// //
+exports.get = (req, res) => makeResponse(res, model.list())
+// ////////////////////////////////////////////////////////////////////////// //
 exports.post = async (req, res) => {
   const payload = await resolveRequest(req)
 
@@ -30,10 +30,8 @@ exports.post = async (req, res) => {
   makeResponse(res, model.create(payload))
 }
 // ////////////////////////////////////////////////////////////////////////// //
-exports.get = (req, res) => makeResponse(res, model.list())
-// ////////////////////////////////////////////////////////////////////////// //
 exports.put = async (req, res) => {
-  const [id] = req.url.split('/').reverse()
+  const [userId] = req.url.split('/').reverse()
   const payload = await resolveRequest(req)
 
   if (validate(payload) === false)
@@ -42,7 +40,7 @@ exports.put = async (req, res) => {
       message: 'validation failed'
     })
 
-  makeResponse(res, model.update(payload))
+  makeResponse(res, model.update(userId, payload))
 }
 // ////////////////////////////////////////////////////////////////////////// //
 exports.del = ({ url }, res) => {
