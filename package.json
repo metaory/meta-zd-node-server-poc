@@ -1,0 +1,14 @@
+{
+  "name": "meta-zd-node-server-poc",
+  "description": "Zero Dependency Node Server POC",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "author": "metaory@gmail.com",
+  "scripts": {
+    "start": "node index"
+  },
+  "devDependencies": {
+    "eslint": "^5.14.1"
+  }
+}
