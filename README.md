@@ -2,9 +2,9 @@
 
 Zero Dependency Node Server POC
 
-### Setup
+### :zap: Setup / Run
 
-just run `npm start`
+`npm start`
 
 * * *
 
